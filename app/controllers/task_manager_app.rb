@@ -1,7 +1,10 @@
 require_relative '../models/task.rb'
+require 'pry'
 
 class TaskManagerApp < Sinatra::Base
   set :root, File.expand_path("..", __dir__)
+
+  attr_reader :location
 
   get '/' do
     erb :dashboard
@@ -9,6 +12,7 @@ class TaskManagerApp < Sinatra::Base
 
   get '/tasks' do
     @tasks = Task.all
+    @location = params[:location]
     erb :index
   end
 
